@@ -24,6 +24,8 @@
 	top:-2px;
 	left:-2px;
 	margin-right:2px;
+	height:12px;
+	width:12px;
 }
 .comm3_timed_list .timed_list_title a:hover {
 	text-decoration: none;

@@ -3,6 +3,14 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 widget_css();
 
+$icon_url = widget_data_url( $widget_config['code'], 'icon' );
+
+$file_headers = @get_headers($icon_url);
+
+if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
+    $icon_url = null;
+}
+
 if( $widget_config['title'] ) $title = $widget_config['title'];
 else $title = 'no title';
 
@@ -22,7 +30,7 @@ $list = g::posts( array(
 <div class="comm3_timed_list">
     <div class="timed_list_title">		
 		<?/*x::url()?>/widget/<?=$widget_config['name']*/?>
-		<?//if( $options ) echo "<img class='icon' src='".$options['icon']."'/>";?>
+		<?if( $icon_url ) echo "<img class='icon' src='".$icon_url."'/>";?>
 		<a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>'><?=$title?></a>
 		<a class='more_button' href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table?>">자세히</a>
 	</div>
