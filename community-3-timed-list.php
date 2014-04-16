@@ -36,30 +36,24 @@ $list = g::posts( array(
 	</div>
     <ul>
 	<?php 
-	
+		$most_commented = null;
 		// 코멘트가 가장 많은 글 1개의 글번호를 가져온다.
 			$most_commented_wr_id = array();
 			foreach ( $list as $li ) {
-				$most_commented_wr_id[$li['wr_id']] = $li['comment_cnt'];
+				$most_commented_wr_id[$li['wr_id']] = $li['wr_comment'];
 				
 			}
-			arsort( $most_commented_wr_id );
-			array_pop($most_commented_wr_id);
-			array_pop($most_commented_wr_id);
-			array_pop($most_commented_wr_id);
-			array_pop($most_commented_wr_id);
+			arsort( $most_commented_wr_id );			
 			
-		
-		
+			$most_commented[key($most_commented_wr_id)] = reset($most_commented_wr_id);			
+							
 	?>
 	
 	
-    <?php for ($i=0; $i<count($list); $i++) {
-			if ( $list[$i]['comment_cnt'] ) {
-				foreach ( $most_commented_wr_id as $key => $value ) {
-					if ( $key == $list[$i]['wr_id'] ) $add_color = "style='color: #cc4235; font-weight: bold;'";
-					else $add_color = null;
-				}
+    <?php for ($i=0; $i<count($list); $i++) {	
+			if ( $list[$i]['wr_comment'] ) {							
+				if ( key($most_commented) == $list[$i]['wr_id'] ) $add_color = "style='color: #cc4235; font-weight: bold;'";
+				else $add_color = null;				
 			}
 			else $add_color = null;
 	?>
@@ -68,8 +62,8 @@ $list = g::posts( array(
             <?php 			
             echo "<span class='subject'><img class='dot' src='".x::url()."/widget/".$widget_config['name']."/img/square-icon.png' /><a $add_color href=\"".$list[$i]['url']."\">".$list[$i]['wr_subject']."</a></span>";
 			
-			if( !$list[$i]['comment_cnt'] ) $comment_count = "<span class='comment_count no-comment'>0</span>";
-			else $comment_count = "<span class='comment_count'>".$list[$i]['comment_cnt']."</span>";
+			if( !$list[$i]['wr_comment'] ) $comment_count = "<span class='comment_count no-comment'>0</span>";
+			else $comment_count = "<span class='comment_count'>".$list[$i]['wr_comment']."</span>";
 			$date_and_time = explode(" ",$list[$i]['wr_datetime']);
 			if( $date_and_time[0] == date("Y-m-d") ) $post_date = $date_and_time[1];
 			else $post_date = $date_and_time[0];
