@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <config>
+	<id>widget community-3-timed-list</id>
 	<type>widget</type>
 	<category>
 		<main>post</main>
