@@ -14,13 +14,13 @@ if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
 if( $widget_config['title'] ) $title = $widget_config['title'];
 else $title = 'no title';
 
-if( $widget_config['forum1'] ) $bo_table = $widget_config['forum1'];
-else $bo_table = bo_table(1);
+if( $widget_config['forum1'] ) $_bo_table = $widget_config['forum1'];
+else $_bo_table = bo_table(1);
 
 $limit = 5;
 
 $list = g::posts( array(
-			"bo_table" 	=>	$bo_table,
+			"bo_table" 	=>	$_bo_table,
 			"limit"		=>	$limit
 				)
 		);		
@@ -31,8 +31,8 @@ $list = g::posts( array(
     <div class="timed_list_title">		
 		<?/*x::url()?>/widget/<?=$widget_config['name']*/?>
 		<?if( $icon_url ) echo "<img class='icon' src='".$icon_url."'/>";?>
-		<a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$bo_table?>'><?=$title?></a>
-		<a class='more_button' href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table?>">자세히</a>
+		<a href='<?=G5_BBS_URL?>/board.php?bo_table=<?=$_bo_table?>'><?=$title?></a>
+		<a class='more_button' href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?=$_bo_table?>">자세히</a>
 	</div>
     <ul>
 	<?php 
